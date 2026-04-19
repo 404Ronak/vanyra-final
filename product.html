@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="VANYRA product — handcrafted detail." />
+  <title>Product — VANYRA</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Outfit:wght@300;400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body class="page-product">
+  <a class="skip-link" href="#main">Skip to content</a>
+  <div class="page-transition" aria-hidden="true"></div>
+
+  <header class="site-header">
+    <a class="logo" href="index.html">VANYRA</a>
+    <button type="button" class="menu-toggle" aria-expanded="false" aria-controls="site-menu">
+      <span class="menu-toggle__label">Menu</span>
+      <span class="menu-toggle__icon" aria-hidden="true"></span>
+    </button>
+  </header>
+
+  <div id="site-menu" class="menu-overlay" hidden>
+    <nav class="menu-overlay__nav" aria-label="Primary">
+      <a href="index.html">Home</a>
+      <a href="collection.html">Collection</a>
+      <a href="about.html">About</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+  </div>
+
+  <main id="main" class="main--pad">
+    <div class="container product-layout">
+      <nav class="breadcrumb reveal" aria-label="Breadcrumb">
+        <a href="collection.html">Collection</a>
+        <span aria-hidden="true">/</span>
+        <span id="product-bc-name">Product</span>
+      </nav>
+
+      <article class="product-detail" id="product-root">
+        <div class="product-detail__media reveal">
+          <img
+            id="product-image"
+            src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1 1'%3E%3C/svg%3E"
+            alt=""
+            width="1000"
+            height="1250"
+          />
+        </div>
+        <div class="product-detail__info">
+          <h1 class="product-detail__title reveal" id="product-name"></h1>
+          <p class="product-detail__price reveal" id="product-price"></p>
+          <p class="product-detail__ship muted small reveal" id="product-ship"></p>
+          <div class="product-detail__story reveal" id="product-story"></div>
+          <div class="product-detail__delivery reveal muted" id="product-delivery"></div>
+          <div class="product-detail__cta reveal">
+            <button type="button" class="btn btn--primary btn--wide" id="product-buy">Request to purchase</button>
+            <p class="small muted" id="buy-note">We will confirm availability and lead time by email.</p>
+          </div>
+        </div>
+      </article>
+
+      <p class="product-missing muted" id="product-missing" hidden>We could not find this piece. <a href="collection.html">Return to collection</a>.</p>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <span class="logo logo--small">VANYRA</span>
+      <p class="muted small">Handcrafted in the Dang region.</p>
+    </div>
+  </footer>
+
+  <script src="ux.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
