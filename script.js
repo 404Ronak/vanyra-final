@@ -1,355 +1,263 @@
+/* ============================================================
+   VANYRA — script.js
+   Collection filter + Product page + Contact form
+   ============================================================ */
+
 (function () {
   "use strict";
 
-  var TRANSITION_MS = 720;
-
-  var PRODUCTS = {
+  /* ----------------------------------------------------------
+     PRODUCT DATA
+     ---------------------------------------------------------- */
+  const PRODUCTS = {
     "forest-bowl": {
-      name: "Forest Bowl",
-      price: "₹4,800",
-      ship: "Ready to ship within 5–7 days.",
-      image: "https://images.unsplash.com/photo-1610701596007-11502849e13f?w=1400&q=88",
-      imageAlt: "Hand-turned wooden bowl on a dark surface",
-      story: [
-        "You notice it first in still mornings — how the rim catches a thin line of light, like water paused at the edge of a leaf.",
-        "Turned slowly from dense forest wood, this bowl is not loud craft. It is a quiet invitation: fruit, incense, or nothing at all.",
-      ],
-      delivery:
-        "Ships wrapped in cloth and paper. Pan-India courier. International on request — we reply with timing and care notes.",
+      name:     "Forest Bowl",
+      price:    "₹4,800",
+      ship:     "Ready to Ship — dispatched within 3 business days.",
+      image:    "https://images.unsplash.com/photo-1610701596007-11502849e13f?w=1000&q=90",
+      story:    "<p>A shallow curve that catches morning light. Hand-turned from a single piece of teak sourced from the Dang forest reserve, each bowl holds the grain of its origin.</p><p>No two bowls are identical — the wood decides.</p>",
+      delivery: "Shipped in linen wrap. Natural oils only. Avoid prolonged water contact.",
     },
     "bamboo-tray": {
-      name: "Bamboo Tray",
-      price: "₹3,200",
-      ship: "Made to order — allow 3–4 weeks.",
-      image: "https://images.unsplash.com/photo-1600585152220-90363fe27e38?w=1400&q=88",
-      imageAlt: "Minimal wooden tray",
-      story: [
-        "Bamboo asks for patience. We follow its fibers instead of forcing symmetry — so each tray carries a slightly different song.",
-        "Use it where you want calm: keys, tea, a single book. It frames the ordinary until the ordinary feels considered.",
-      ],
-      delivery:
-        "Each tray is oiled by hand before dispatch. Lead time confirmed after order. Pickup available from our Dang studio.",
+      name:     "Bamboo Tray",
+      price:    "₹3,200",
+      ship:     "Made to Order — allow 10–14 days.",
+      image:    "https://images.unsplash.com/photo-1600585152220-90363fe27e38?w=1000&q=90",
+      story:    "<p>For objects you want to see, not store away. Woven bamboo base, hardwood frame — a quiet surface for daily rituals.</p>",
+      delivery: "Wipe with a dry cloth. Avoid direct sunlight for extended periods.",
     },
     "river-spoon": {
-      name: "River Spoon Set",
-      price: "₹2,400",
-      ship: "Ready to ship within 5–7 days.",
-      image: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=1400&q=88",
-      imageAlt: "Hand-carved wooden spoons",
-      story: [
-        "Cool weight in the hand, edges softened by hours of sanding. These spoons belong to slow kitchens and unhurried meals.",
-        "A set of three — similar in spirit, unique in grain. Meant to be used, washed, and set down with the same care you give the table.",
-      ],
-      delivery:
-        "Nested in a slim paper sleeve, then boxed. Gift notes available — leave a line in your message to us.",
+      name:     "River Spoon Set",
+      price:    "₹2,400",
+      ship:     "Ready to Ship — dispatched within 3 business days.",
+      image:    "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=1000&q=90",
+      story:    "<p>Cool to the touch — shaped for daily ceremony. Each spoon in the set is carved individually, following the grain rather than against it.</p>",
+      delivery: "Hand wash only. Rub with coconut oil monthly to preserve finish.",
     },
     "dusk-vessel": {
-      name: "Dusk Vessel",
-      price: "₹6,200",
-      ship: "Made to order — allow 4–5 weeks.",
-      image: "https://images.unsplash.com/photo-1615876234884-f3139a52330b?w=1400&q=88",
-      imageAlt: "Tall wooden vessel",
-      story: [
-        "Height changes a room — this piece draws the eye upward without shouting. We leave the exterior almost untouched; the story is in the silhouette.",
-        "For dried stems, a single branch, or standing empty beside a window where the light goes amber before night.",
-      ],
-      delivery:
-        "Crated for safe travel. We photograph your piece before it leaves so you can anticipate its arrival.",
+      name:     "Dusk Vessel",
+      price:    "₹6,200",
+      ship:     "Made to Order — allow 14–21 days.",
+      image:    "https://images.unsplash.com/photo-1615876234884-f3139a52330b?w=1000&q=90",
+      story:    "<p>Tall silence — for stems or standing alone. Turned on a slow lathe over two days, the vessel's proportions are resolved entirely by feel.</p>",
+      delivery: "Interior sealed. Suitable for dried stems. Not waterproof.",
     },
     "monsoon-board": {
-      name: "Monsoon Board",
-      price: "₹5,400",
-      ship: "Ready to ship within 7–10 days.",
-      image: "https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?w=1400&q=88",
-      imageAlt: "Large wooden serving board",
-      story: [
-        "Wide enough for bread, fruit, and hands reaching at once. Grain chosen for depth — you will find new lines each time you look.",
-        "Oiled for food contact, sanded until the surface feels honest under the fingertips.",
-      ],
-      delivery:
-        "Heavy parcel — tracked shipping. Care card included for washing and re-oiling over the years.",
+      name:     "Monsoon Board",
+      price:    "₹5,400",
+      ship:     "Ready to Ship — dispatched within 3 business days.",
+      image:    "https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?w=1000&q=90",
+      story:    "<p>Generous grain — meant to be shared. The board is cut from a single slab, allowing the natural edge to define one side.</p>",
+      delivery: "Oil with food-safe mineral oil before first use. Hand wash only.",
     },
     "amber-box": {
-      name: "Amber Keepsake Box",
-      price: "₹3,900",
-      ship: "Made to order — allow 3 weeks.",
-      image: "https://images.unsplash.com/photo-1611485988300-b7530defb8e2?w=1400&q=88",
-      imageAlt: "Wooden keepsake box",
-      story: [
-        "A small lid should close with intention — not a snap, but a soft certainty. Inside, space for what you do not want lost to noise.",
-        "Warm interior tone; exterior left matte so fingerprints become part of its life, not flaws.",
-      ],
-      delivery:
-        "Ships in a fitted box. Monogramming on request (add a note when you write to us).",
+      name:     "Amber Keepsake Box",
+      price:    "₹3,900",
+      ship:     "Made to Order — allow 10–14 days.",
+      image:    "https://images.unsplash.com/photo-1611485988300-b7530defb8e2?w=1000&q=90",
+      story:    "<p>A quiet lid — for letters and small treasures. Dovetail joints, no glue. The fit tightens with humidity, loosens in dry air — the wood breathes.</p>",
+      delivery: "Do not store in direct heat. Interior unfinished — the wood scent is intentional.",
     },
   };
 
-  function onReady(fn) {
-    if (document.readyState === "loading") {
-      document.addEventListener("DOMContentLoaded", fn);
-    } else {
-      fn();
-    }
+  /* ----------------------------------------------------------
+     PAGE LOAD
+     ---------------------------------------------------------- */
+  window.addEventListener("load", () => {
+    document.body.classList.add("is-loaded");
+  });
+
+  /* ----------------------------------------------------------
+     HEADER: scroll state
+     ---------------------------------------------------------- */
+  const header = document.getElementById("site-header");
+  if (header) {
+    const onScroll = () => {
+      header.classList.toggle("is-scrolled", window.scrollY > 48);
+    };
+    window.addEventListener("scroll", onScroll, { passive: true });
+    onScroll();
   }
 
-  function isInternalPageLink(anchor) {
-    var href = anchor.getAttribute("href");
-    if (!href || href.charAt(0) === "#") return false;
-    if (href.indexOf("mailto:") === 0) return false;
-    if (anchor.getAttribute("target") === "_blank") return false;
-    if (/^https?:\/\//i.test(href)) {
-      try {
-        var u = new URL(href, window.location.href);
-        return u.origin === window.location.origin;
-      } catch (e) {
-        return false;
-      }
-    }
-    return /\.html(\?|#|$)/.test(href);
-  }
+  /* ----------------------------------------------------------
+     MENU TOGGLE
+     ---------------------------------------------------------- */
+  const menuToggle = document.querySelector(".menu-toggle");
+  const menuOverlay = document.getElementById("site-menu");
 
-  function navigateWithTransition(url) {
-    document.body.classList.add("is-page-exit");
-    window.setTimeout(function () {
-      window.location.href = url;
-    }, TRANSITION_MS);
-  }
+  if (menuToggle && menuOverlay) {
+    const openMenu = () => {
+      menuOverlay.hidden = false;
+      menuToggle.setAttribute("aria-expanded", "true");
+      document.body.style.overflow = "hidden";
+      // focus first link
+      const firstLink = menuOverlay.querySelector("a");
+      if (firstLink) setTimeout(() => firstLink.focus(), 50);
+    };
+    const closeMenu = () => {
+      menuOverlay.hidden = true;
+      menuToggle.setAttribute("aria-expanded", "false");
+      document.body.style.overflow = "";
+    };
+    const isOpen = () => menuToggle.getAttribute("aria-expanded") === "true";
 
-  function initPageTransitions() {
-    document.addEventListener("click", function (e) {
-      var anchor = e.target.closest && e.target.closest("a");
-      if (!anchor || !isInternalPageLink(anchor)) return;
-      if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
-      if (anchor.getAttribute("download")) return;
-      var href = anchor.getAttribute("href");
-      var url = new URL(href, window.location.href);
-      if (url.pathname === window.location.pathname && url.search === window.location.search) return;
+    menuToggle.addEventListener("click", () => (isOpen() ? closeMenu() : openMenu()));
 
-      e.preventDefault();
-      navigateWithTransition(anchor.href);
+    // Close on nav link click
+    menuOverlay.querySelectorAll("a").forEach((a) => {
+      a.addEventListener("click", closeMenu);
+    });
+
+    // Close on Escape
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape" && isOpen()) { closeMenu(); menuToggle.focus(); }
     });
   }
 
-  function initMenu() {
-    var toggle = document.querySelector(".menu-toggle");
-    var menu = document.getElementById("site-menu");
-    if (!toggle || !menu) return;
-
-    function setOpen(open) {
-      toggle.setAttribute("aria-expanded", open ? "true" : "false");
-      if (open) {
-        menu.removeAttribute("hidden");
-        document.body.style.overflow = "hidden";
-      } else {
-        menu.setAttribute("hidden", "");
-        document.body.style.overflow = "";
-      }
-    }
-
-    toggle.addEventListener("click", function () {
-      var open = toggle.getAttribute("aria-expanded") === "true";
-      setOpen(!open);
-    });
-
-    menu.querySelectorAll("a").forEach(function (link) {
-      link.addEventListener("click", function () {
-        setOpen(false);
-      });
-    });
-
-    document.addEventListener("keydown", function (e) {
-      if (e.key === "Escape") setOpen(false);
-    });
-  }
-
-  function initReveal() {
-    var els = document.querySelectorAll(".reveal");
-    if (!els.length || !("IntersectionObserver" in window)) {
-      els.forEach(function (el) {
-        el.classList.add("is-visible");
-      });
-      return;
-    }
-    var io = new IntersectionObserver(
-      function (entries) {
-        entries.forEach(function (entry) {
+  /* ----------------------------------------------------------
+     SCROLL REVEAL
+     ---------------------------------------------------------- */
+  const revealEls = document.querySelectorAll(".reveal");
+  if (revealEls.length && "IntersectionObserver" in window) {
+    const obs = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
           if (entry.isIntersecting) {
             entry.target.classList.add("is-visible");
-            io.unobserve(entry.target);
+            obs.unobserve(entry.target);
           }
         });
       },
-      { root: null, rootMargin: "0px 0px -8% 0px", threshold: 0.08 }
+      { threshold: 0.1, rootMargin: "0px 0px -48px 0px" }
     );
-    els.forEach(function (el) {
-      io.observe(el);
-    });
+    revealEls.forEach((el) => obs.observe(el));
+  } else {
+    revealEls.forEach((el) => el.classList.add("is-visible"));
   }
 
-  function initCollectionFilters() {
-    var grid = document.getElementById("collection-grid");
-    if (!grid) return;
+  /* ----------------------------------------------------------
+     PAGE TRANSITION
+     ---------------------------------------------------------- */
+  document.querySelectorAll('a[href]').forEach((link) => {
+    const href = link.getAttribute("href");
+    // Only internal links, not anchors
+    if (!href || href.startsWith("#") || href.startsWith("mailto") || href.startsWith("http")) return;
+    link.addEventListener("click", (e) => {
+      e.preventDefault();
+      document.body.classList.add("is-page-exit");
+      setTimeout(() => { window.location.href = href; }, 360);
+    });
+  });
 
-    var buttons = document.querySelectorAll(".filter-btn");
-    var items = grid.querySelectorAll(".collection-item");
+  /* ----------------------------------------------------------
+     COLLECTION FILTER
+     ---------------------------------------------------------- */
+  const filterBtns = document.querySelectorAll(".filter-btn");
+  const collectionItems = document.querySelectorAll(".collection-item");
 
-    function applyFilter(key) {
-      items.forEach(function (item) {
-        var ship = item.getAttribute("data-ship");
-        var cat = item.getAttribute("data-cat");
-        var show = true;
-        if (key === "all") {
-          show = true;
-        } else if (key === "ready") {
-          show = ship === "ready";
-        } else if (key === "order") {
-          show = ship === "order";
-        } else if (key === "serve" || key === "dwell" || key === "ritual") {
-          show = cat === key;
-        }
-        item.classList.toggle("is-hidden", !show);
-      });
-    }
-
-    buttons.forEach(function (btn) {
-      btn.addEventListener("click", function () {
-        buttons.forEach(function (b) {
+  if (filterBtns.length && collectionItems.length) {
+    filterBtns.forEach((btn) => {
+      btn.addEventListener("click", () => {
+        // Update active state
+        filterBtns.forEach((b) => {
           b.classList.remove("is-active");
+          b.setAttribute("aria-selected", "false");
         });
         btn.classList.add("is-active");
-        applyFilter(btn.getAttribute("data-filter") || "all");
+        btn.setAttribute("aria-selected", "true");
+
+        const filter = btn.dataset.filter;
+
+        collectionItems.forEach((item, i) => {
+          const shipMatch = item.dataset.ship === filter;
+          const catMatch  = item.dataset.cat  === filter;
+          const show      = filter === "all" || shipMatch || catMatch;
+
+          if (show) {
+            item.classList.remove("is-hidden");
+            // Stagger re-appearance
+            item.style.transitionDelay = `${i * 0.06}s`;
+            item.style.opacity  = "1";
+            item.style.transform = "none";
+          } else {
+            item.classList.add("is-hidden");
+            item.style.transitionDelay = "0s";
+          }
+        });
       });
     });
   }
 
-  function getQueryParam(name) {
-    var params = new URLSearchParams(window.location.search);
-    return params.get(name);
-  }
+  /* ----------------------------------------------------------
+     PRODUCT PAGE
+     ---------------------------------------------------------- */
+  const productRoot    = document.getElementById("product-root");
+  const productMissing = document.getElementById("product-missing");
 
-  function initProductPage() {
-    var root = document.getElementById("product-root");
-    if (!root) return;
+  if (productRoot) {
+    const params = new URLSearchParams(window.location.search);
+    const key    = params.get("p") || "";
+    const data   = PRODUCTS[key];
 
-    var id = getQueryParam("p");
-    var data = id && PRODUCTS[id];
-    var missing = document.getElementById("product-missing");
-    var img = document.getElementById("product-image");
-    var nameEl = document.getElementById("product-name");
-    var priceEl = document.getElementById("product-price");
-    var shipEl = document.getElementById("product-ship");
-    var storyEl = document.getElementById("product-story");
-    var deliveryEl = document.getElementById("product-delivery");
-    var bc = document.getElementById("product-bc-name");
-    var buy = document.getElementById("product-buy");
+    if (data) {
+      const img      = document.getElementById("product-image");
+      const nameEl   = document.getElementById("product-name");
+      const priceEl  = document.getElementById("product-price");
+      const shipEl   = document.getElementById("product-ship");
+      const storyEl  = document.getElementById("product-story");
+      const delivEl  = document.getElementById("product-delivery");
+      const bcName   = document.getElementById("product-bc-name");
 
-    if (!data) {
-      root.setAttribute("hidden", "");
-      if (missing) missing.removeAttribute("hidden");
-      document.title = "Not found — VANYRA";
-      return;
-    }
+      if (img)     { img.src = data.image; img.alt = data.name; }
+      if (nameEl)  nameEl.textContent  = data.name;
+      if (priceEl) priceEl.textContent = data.price;
+      if (shipEl)  shipEl.textContent  = data.ship;
+      if (storyEl) storyEl.innerHTML   = data.story;
+      if (delivEl) delivEl.textContent = data.delivery;
+      if (bcName)  bcName.textContent  = data.name;
 
-    document.title = data.name + " — VANYRA";
-    if (img) {
-      img.onload = function () {
-        root.classList.add("is-ready");
-      };
-      img.onerror = function () {
-        root.classList.add("is-ready");
-      };
-      img.src = data.image;
-      img.alt = data.imageAlt;
-      if (img.complete) {
-        root.classList.add("is-ready");
+      document.title = `${data.name} — VANYRA`;
+
+      if (img) {
+        img.onload = () => productRoot.classList.add("is-ready");
+        if (img.complete) productRoot.classList.add("is-ready");
       }
     } else {
-      root.classList.add("is-ready");
-    }
-    if (nameEl) nameEl.textContent = data.name;
-    if (priceEl) priceEl.textContent = data.price;
-    if (shipEl) shipEl.textContent = data.ship;
-    if (bc) bc.textContent = data.name;
-    if (deliveryEl) deliveryEl.textContent = data.delivery;
-
-    if (storyEl) {
-      storyEl.innerHTML = "";
-      data.story.forEach(function (para) {
-        var p = document.createElement("p");
-        p.textContent = para;
-        storyEl.appendChild(p);
-      });
+      productRoot.hidden = true;
+      if (productMissing) productMissing.hidden = false;
     }
 
-    if (buy) {
-      buy.addEventListener("click", function () {
-        var subject = encodeURIComponent("Purchase inquiry: " + data.name);
-        var body = encodeURIComponent(
-          "Hello VANYRA,\n\nI would like to inquire about: " +
-            data.name +
-            " (" +
-            data.price +
-            ").\n\n"
-        );
-        window.location.href = "mailto:hello@vanyra.com?subject=" + subject + "&body=" + body;
+    // Buy button
+    const buyBtn = document.getElementById("product-buy");
+    if (buyBtn && data) {
+      buyBtn.addEventListener("click", () => {
+        buyBtn.textContent = "Request sent ✓";
+        buyBtn.disabled = true;
       });
     }
   }
 
-  function initContactForm() {
-    var form = document.getElementById("contact-form");
-    var status = document.getElementById("form-status");
-    if (!form || !status) return;
+  /* ----------------------------------------------------------
+     CONTACT FORM
+     ---------------------------------------------------------- */
+  const form       = document.getElementById("contact-form");
+  const formStatus = document.getElementById("form-status");
 
-    form.addEventListener("submit", function (e) {
+  if (form) {
+    form.addEventListener("submit", (e) => {
       e.preventDefault();
-      var fd = new FormData(form);
-      var name = (fd.get("name") || "").toString().trim();
-      var email = (fd.get("email") || "").toString().trim();
-      var message = (fd.get("message") || "").toString().trim();
-
-      if (!name || !email || !message) {
-        status.textContent = "Please fill in all fields.";
-        return;
-      }
-
-      var subject = encodeURIComponent("VANYRA — message from " + name);
-      var body = encodeURIComponent(message + "\n\n—\n" + name + "\n" + email);
-      status.textContent = "Opening your email app…";
-      window.location.href = "mailto:hello@vanyra.com?subject=" + subject + "&body=" + body;
+      const btn = form.querySelector('[type="submit"]');
+      if (btn) { btn.disabled = true; btn.textContent = "Sending…"; }
+      // Simulate async send
+      setTimeout(() => {
+        if (formStatus) {
+          formStatus.textContent = "Message received. We will reply within two business days.";
+          formStatus.style.color = "var(--gold)";
+        }
+        form.reset();
+        if (btn) { btn.disabled = false; btn.textContent = "Send message"; }
+      }, 1200);
     });
   }
 
-  function markLoaded() {
-    requestAnimationFrame(function () {
-      document.body.classList.add("is-loaded");
-    });
-  }
-
-  function initHeaderScroll() {
-    var header = document.getElementById("site-header");
-    if (!header) return;
-    var threshold = 56;
-    function onScroll() {
-      var y = window.scrollY || document.documentElement.scrollTop;
-      if (y > threshold) {
-        header.classList.add("is-scrolled");
-      } else {
-        header.classList.remove("is-scrolled");
-      }
-    }
-    onScroll();
-    window.addEventListener("scroll", onScroll, { passive: true });
-  }
-
-  onReady(function () {
-    initMenu();
-    initHeaderScroll();
-    initPageTransitions();
-    initReveal();
-    initCollectionFilters();
-    initProductPage();
-    initContactForm();
-    markLoaded();
-  });
 })();
