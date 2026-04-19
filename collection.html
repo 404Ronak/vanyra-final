@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="VANYRA collection — handcrafted wood and bamboo." />
+  <title>Collection — VANYRA</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Outfit:wght@300;400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body class="page-collection">
+  <a class="skip-link" href="#main">Skip to content</a>
+  <div class="page-transition" aria-hidden="true"></div>
+
+  <header class="site-header">
+    <a class="logo" href="index.html">VANYRA</a>
+    <button type="button" class="menu-toggle" aria-expanded="false" aria-controls="site-menu">
+      <span class="menu-toggle__label">Menu</span>
+      <span class="menu-toggle__icon" aria-hidden="true"></span>
+    </button>
+  </header>
+
+  <div id="site-menu" class="menu-overlay" hidden>
+    <nav class="menu-overlay__nav" aria-label="Primary">
+      <a href="index.html">Home</a>
+      <a href="collection.html">Collection</a>
+      <a href="about.html">About</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+  </div>
+
+  <main id="main" class="main--pad">
+    <section class="page-hero page-hero--compact">
+      <div class="container">
+        <p class="eyebrow reveal">Collection</p>
+        <h1 class="page-hero__title reveal">Objects for calm rooms</h1>
+        <p class="page-hero__lead muted reveal">Large images, few words — choose what resonates.</p>
+      </div>
+    </section>
+
+    <section class="section section--tight">
+      <div class="container">
+        <div class="filters reveal" role="tablist" aria-label="Filter collection">
+          <button type="button" class="filter-btn is-active" data-filter="all">All</button>
+          <button type="button" class="filter-btn" data-filter="ready">Ready to Ship</button>
+          <button type="button" class="filter-btn" data-filter="order">Made to Order</button>
+          <button type="button" class="filter-btn" data-filter="serve">Serve</button>
+          <button type="button" class="filter-btn" data-filter="dwell">Dwell</button>
+          <button type="button" class="filter-btn" data-filter="ritual">Ritual</button>
+        </div>
+
+        <div class="collection-grid" id="collection-grid">
+          <article class="collection-item" data-ship="ready" data-cat="serve">
+            <a class="collection-item__link" href="product.html?p=forest-bowl">
+              <div class="collection-item__media">
+                <img src="https://images.unsplash.com/photo-1610701596007-11502849e13f?w=900&q=80" alt="Forest Bowl" loading="lazy" width="900" height="1100" />
+              </div>
+              <div class="collection-item__text">
+                <h2>Forest Bowl</h2>
+                <p class="price">₹4,800</p>
+                <p class="one-line muted">A shallow curve that catches morning light.</p>
+              </div>
+            </a>
+          </article>
+          <article class="collection-item" data-ship="order" data-cat="dwell">
+            <a class="collection-item__link" href="product.html?p=bamboo-tray">
+              <div class="collection-item__media">
+                <img src="https://images.unsplash.com/photo-1600585152220-90363fe27e38?w=900&q=80" alt="Bamboo Tray" loading="lazy" width="900" height="1100" />
+              </div>
+              <div class="collection-item__text">
+                <h2>Bamboo Tray</h2>
+                <p class="price">₹3,200</p>
+                <p class="one-line muted">For objects you want to see, not store away.</p>
+              </div>
+            </a>
+          </article>
+          <article class="collection-item" data-ship="ready" data-cat="ritual">
+            <a class="collection-item__link" href="product.html?p=river-spoon">
+              <div class="collection-item__media">
+                <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=900&q=80" alt="River Spoon Set" loading="lazy" width="900" height="1100" />
+              </div>
+              <div class="collection-item__text">
+                <h2>River Spoon Set</h2>
+                <p class="price">₹2,400</p>
+                <p class="one-line muted">Cool to the touch — shaped for daily ceremony.</p>
+              </div>
+            </a>
+          </article>
+          <article class="collection-item" data-ship="order" data-cat="dwell">
+            <a class="collection-item__link" href="product.html?p=dusk-vessel">
+              <div class="collection-item__media">
+                <img src="https://images.unsplash.com/photo-1615876234884-f3139a52330b?w=900&q=80" alt="Dusk Vessel" loading="lazy" width="900" height="1100" />
+              </div>
+              <div class="collection-item__text">
+                <h2>Dusk Vessel</h2>
+                <p class="price">₹6,200</p>
+                <p class="one-line muted">Tall silence — for stems or standing alone.</p>
+              </div>
+            </a>
+          </article>
+          <article class="collection-item" data-ship="ready" data-cat="serve">
+            <a class="collection-item__link" href="product.html?p=monsoon-board">
+              <div class="collection-item__media">
+                <img src="https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?w=900&q=80" alt="Monsoon Board" loading="lazy" width="900" height="1100" />
+              </div>
+              <div class="collection-item__text">
+                <h2>Monsoon Board</h2>
+                <p class="price">₹5,400</p>
+                <p class="one-line muted">Generous grain — meant to be shared.</p>
+              </div>
+            </a>
+          </article>
+          <article class="collection-item" data-ship="order" data-cat="ritual">
+            <a class="collection-item__link" href="product.html?p=amber-box">
+              <div class="collection-item__media">
+                <img src="https://images.unsplash.com/photo-1611485988300-b7530defb8e2?w=900&q=80" alt="Amber Keepsake Box" loading="lazy" width="900" height="1100" />
+              </div>
+              <div class="collection-item__text">
+                <h2>Amber Keepsake Box</h2>
+                <p class="price">₹3,900</p>
+                <p class="one-line muted">A quiet lid — for letters and small treasures.</p>
+              </div>
+            </a>
+          </article>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <span class="logo logo--small">VANYRA</span>
+      <p class="muted small">Handcrafted in the Dang region.</p>
+    </div>
+  </footer>
+
+  <script src="ux.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
